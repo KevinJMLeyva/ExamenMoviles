@@ -1,7 +1,7 @@
 package com.example.kotlin.examen.utils
 
 import android.app.Application
-import com.example.kotlin.wushuapp.data.network.NetworkModuleDI
+import com.example.kotlin.examen.data.network.NetworkModuleDI
 
 class Examen : Application() {
     override fun onCreate() {
