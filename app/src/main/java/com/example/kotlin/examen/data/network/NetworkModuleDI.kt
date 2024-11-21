@@ -1,4 +1,4 @@
-package com.example.kotlin.wushuapp.data.network
+package com.example.kotlin.examen.data.network
 
 import android.content.Context
 import com.example.kotlin.wushuapp.utils.Constants.APPLICATION_ID

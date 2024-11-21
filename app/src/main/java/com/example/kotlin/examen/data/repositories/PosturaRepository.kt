@@ -2,7 +2,7 @@ package com.example.kotlin.examen.data.repositories
 
 import android.util.Log
 import com.example.kotlin.examen.data.network.model.Postura
-import com.example.kotlin.wushuapp.data.network.NetworkModuleDI
+import com.example.kotlin.examen.data.network.NetworkModuleDI
 import com.google.gson.Gson
 import com.parse.ParseException
 

@@ -2,35 +2,31 @@ package com.example.kotlin.examen.framework.views.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.kotlin.examen.databinding.ActivitySplashscreenBinding
 import com.example.kotlin.examen.framework.viewmodel.SplashscreenViewModel
+import com.example.kotlin.historical.data.repositories.HistoricalEventRepository
 
 /**
  * SplashscreenActivity displays a splash screen when the app launches.
  * It observes the loading process and transitions to the login screen once loading is complete.
  */
 class SplashscreenActivity : AppCompatActivity() {
-    // Binding object to access views in the splash screen layout
+
     private lateinit var binding: ActivitySplashscreenBinding
 
     // ViewModel instance for managing splash screen logic
     private val viewModel: SplashscreenViewModel by viewModels()
 
-    /**
-     * Called when the activity is starting. Initializes binding, starts ViewModel actions,
-     * and sets up observers.
-     *
-     * @param savedInstanceState If the activity is being re-initialized after previously
-     * being shut down, this contains the most recent data; otherwise, it is null.
-     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initializeBinding()
         viewModel.onCreate()
         initializeObservers()
+
     }
 
     /**
@@ -50,19 +46,11 @@ class SplashscreenActivity : AppCompatActivity() {
             this,
             Observer { terminarCarga ->
                 if (terminarCarga) {
-                    passViewGoToMain()
+                    Log.d("SplashscreenActivity", "Terminar carga")
                 }
-            },
+            }
         )
     }
 
-    /**
-     * Starts the LoginActivity and finishes SplashscreenActivity.
-     */
-    private fun passViewGoToMain() {
-        val intent: Intent = Intent(this, PosturasActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        startActivity(intent)
-        finish()
-    }
 }
+
