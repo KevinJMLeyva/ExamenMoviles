@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/pantalla_carga">
+    android:background="@drawable/fondo_h">
     <!-- LinearLayout para el contenido -->
     <LinearLayout
         android:layout_width="wrap_content"
@@ -13,12 +13,9 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="272dp"
-            android:layout_gravity="center"
-            android:src="@drawable/icon_changquan" />
+
         <LinearLayout
+            android:layout_marginTop="150dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -27,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Wushu"
+                android:text="Siendo"
                 android:textAllCaps="true"
                 android:textColor="@color/negro"
                 android:textSize="36sp"
@@ -37,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/marcellus"
                 android:gravity="center"
-                android:text="APP"
+                android:text="Historico"
                 android:textAllCaps="true"
                 android:paddingLeft="18dp"
                 android:textColor="@color/blanco"

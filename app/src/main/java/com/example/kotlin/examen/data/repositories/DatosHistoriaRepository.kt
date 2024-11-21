@@ -10,28 +10,24 @@ import com.parse.ParseException
 /**
  * Repositorio que maneja la lógica de acceso a datos para los eventos históricos.
  */
-class DatosHistoriaRepository{
-    fun consultarEventosHistoricos(callback: (List<EventoHistorico>?) -> Unit) {
+class DatosHistoriaRepository {
+    fun consultarEventosHistoricos(
+        onSuccess: (List<EventoHistorico>?) -> Unit,
+        onError: (String) -> Unit // Nuevo parámetro para manejar errores
+    ) {
         val parametros = HashMap<String, Any>()
 
-        // Llama a la Cloud Function
         NetworkModuleDI.callCloudFunction<HashMap<String, Any>>("hello", parametros) { resultado, e ->
             if (e == null) {
                 try {
-
-                    // Extraer el campo "data" y convertirlo a JSON
                     val gson = Gson()
                     val resultadoMap = resultado?.get("data") ?: emptyList<Map<String, Any>>()
                     val json = gson.toJson(resultadoMap)
 
-                    // Log para ver el contenido del JSON
                     val listaTipo = object : TypeToken<List<Map<String, Any>>>() {}.type
+                    val eventosHistoricos = gson.fromJson<List<Map<String, Any>>>(json, listaTipo)
 
-                    // Parsear el JSON
-                    val evenntosHistoricos = gson.fromJson<List<Map<String, Any>>>(json, listaTipo)
-
-                    // Convertir los datos del JSON a la clase HistoricalEvent
-                    val eventos = evenntosHistoricos.map {
+                    val eventos = eventosHistoricos.map {
                         EventoHistorico(
                             date = it["estimatedData"]?.let { it1 -> (it1 as Map<*, *>)["date"].toString() } ?: "",
                             description = it["estimatedData"]?.let { it1 -> (it1 as Map<*, *>)["description"].toString() } ?: "",
@@ -44,26 +40,17 @@ class DatosHistoriaRepository{
                             objectId = it["state"]?.let { it1 -> (it1 as Map<*, *>)["objectId"].toString() } ?: ""
                         )
                     }
-                    callback(eventos)
-
+                    onSuccess(eventos)
                 } catch (ex: Exception) {
-                    Log.e("HistoricalEventRepo", "Error al procesar el JSON: ${ex.message}")
-                    callback(null)
+                    onError("Error al procesar los datos: ${ex.message}")
                 }
             } else {
-                // Manejo de errores
-                when {
-                    e is ParseException && e.code == ParseException.CONNECTION_FAILED -> {
-                        Log.e("HistoricalEventRepo", "Error de conexión: ${e.message}")
-                    }
-                    e is ParseException && e.code == ParseException.OBJECT_NOT_FOUND -> {
-                        Log.e("HistoricalEventRepo", "Datos no encontrados: ${e.message}")
-                    }
-                    else -> {
-                        Log.e("HistoricalEventRepo", "Error desconocido: ${e.message}")
-                    }
+                val errorMessage = when {
+                    e is ParseException && e.code == ParseException.CONNECTION_FAILED -> "Error de conexión: ${e.message}"
+                    e is ParseException && e.code == ParseException.OBJECT_NOT_FOUND -> "Datos no encontrados: ${e.message}"
+                    else -> "Error desconocido: ${e.message}"
                 }
-                callback(null)
+                onError(errorMessage)
             }
         }
     }

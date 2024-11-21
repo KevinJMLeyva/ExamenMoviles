@@ -10,23 +10,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.kotlin.examen.databinding.ActivityHistoriaBinding
 import com.example.kotlin.examen.framework.adapter.HistoriaAdapter
 import com.example.kotlin.examen.framework.viewmodel.ConsultarHistoriaViewModel
+import com.google.android.material.snackbar.Snackbar
 
-class HistoriaActivity: AppCompatActivity() {
+class HistoriaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHistoriaBinding
-
-    // ViewModel para manejar los datos y la lógica de negocio de las posturas
     private val viewModel: ConsultarHistoriaViewModel by viewModels()
-
-    // Adaptador para el RecyclerView que muestra las posturas
     private lateinit var historiaAdapater: HistoriaAdapter
 
-    /**
-     * Método que se llama cuando se crea la actividad. Configura el enlace de vista,
-     * inicializa el RecyclerView, activa el buscador y observa los datos del ViewModel.
-     *
-     * @param savedInstanceState Estado de la actividad guardado anteriormente.
-     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,8 +28,8 @@ class HistoriaActivity: AppCompatActivity() {
 
         viewModel.consultarDatosHistoricos()
         observarViewModel()
-
     }
+
     private fun inicializarVinculo() {
         binding = ActivityHistoriaBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -49,17 +40,25 @@ class HistoriaActivity: AppCompatActivity() {
             finish()
         }
     }
+
     private fun inicializarRecyclerView() {
         historiaAdapater = HistoriaAdapter()
-        binding.recyclerViewHistoria.layoutManager = GridLayoutManager(this, 3)
+        binding.recyclerViewHistoria.layoutManager = GridLayoutManager(this, 1)
         binding.recyclerViewHistoria.adapter = historiaAdapater
     }
+
     private fun observarViewModel() {
         viewModel.eventosLiveData.observe(this) { eventos ->
             historiaAdapater.establecerPosturaData(eventos, this)
             verificarEstadoResultados(eventos.isEmpty())
         }
+
+        // Observar errores y mostrar Snackbar
+        viewModel.errorLiveData.observe(this) { errorMessage ->
+            mostrarSnackbar(errorMessage)
+        }
     }
+
     private fun eschucharBuscador() {
         binding.buscadorHistoria.addTextChangedListener(
             object : TextWatcher {
@@ -84,9 +83,13 @@ class HistoriaActivity: AppCompatActivity() {
             },
         )
     }
+
     private fun verificarEstadoResultados(sinResultados: Boolean) {
         binding.contenedorSinResultados.visibility = if (sinResultados) View.VISIBLE else View.GONE
         binding.recyclerViewHistoria.visibility = if (sinResultados) View.GONE else View.VISIBLE
     }
 
+    private fun mostrarSnackbar(mensaje: String) {
+        Snackbar.make(binding.root, mensaje, Snackbar.LENGTH_LONG).show()
+    }
 }
