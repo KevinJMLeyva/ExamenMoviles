@@ -1,0 +1,20 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Examen" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/rojo</item>
+        <item name="colorOnPrimary">@color/contenedor_rectangulo</item> <!-- Color del texto en el fondo primario -->
+        <item name="colorOnBackground">@color/negro</item> <!-- Color del texto en el fondo -->
+        <!-- Cambiar el color de la barra de estado -->
+        <item name="android:statusBarColor">@color/negro</item>
+        <!-- Cambiar el color de la barra de navegación -->
+        <item name="android:navigationBarColor">@color/negro</item>
+    </style>
+
+    <style name="Theme.Examen" parent="Base.Theme.Examen" />
+    <style name="Theme.Examen.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+</resources>

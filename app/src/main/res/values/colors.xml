@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="negro">#FF000000</color>
+    <color name="blanco">#FFFFFF</color>
+    <color name="contenedor_rectangulo">#FFFFFF</color>
+    <color name="fondoEntrada">#EDEDEE</color>
+    <color name="rojo">#B02226</color>
+    <color name="gris">#9D9C9E</color>
+    <color name="gris_claro">#D3D1D1D1</color>
+    <color name="gris_entrada">#F0F0F0</color>
+    <color name="gris_claro2">#868686</color>
+    <color name="verde_charleston">#252933</color>
+    <color name="verde_laurel">#A7BE9E</color>
+    <color name="fondo_secundario">#efefef</color>
+
+    <color name="color_exito_barra">#2AB923</color>
+
+    <color name="rojo_falu">#871315</color>
+    <color name="artichoke">#8CA184</color>
+    <color name="espacio_exterior">#404655</color>
+
+    <color name="purple_200">#6200EE</color>
+    <color name="purple_500">#6200EE</color>
+    <color name="purple_700">#3700B3</color>
+    <color name="white">#FFFFFF</color>
+    <color name="teal_200">#03DAC5</color>
+    <color name="teal_700">#018786</color>
+    <color name="black">#000000</color>
+</resources>
