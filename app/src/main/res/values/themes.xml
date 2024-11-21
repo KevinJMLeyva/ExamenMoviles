@@ -1,0 +1,28 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.Examen" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/rojo</item>
+        <item name="colorOnPrimary">@color/contenedor_rectangulo</item>
+        <item name="colorOnBackground">@color/negro</item>
+        <item name="android:statusBarColor">@color/negro</item>
+        <item name="android:navigationBarColor">@color/negro</item>
+    </style>
+
+    <style name="Theme.Examen" parent="Base.Theme.Examen" />
+    <style name="Theme.Examen.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="RegistrarPago" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/rojo</item>
+        <item name="colorPrimaryVariant">@color/contenedor_rectangulo</item>
+        <item name="colorOnPrimary">@color/contenedor_rectangulo</item>
+        <!-- Secondary brand color. -->
+        <item name="colorOnSecondary">@color/negro</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@android:color/transparent
+        </item>  <!-- Customize your theme here. -->
+    </style>
+
+</resources>
