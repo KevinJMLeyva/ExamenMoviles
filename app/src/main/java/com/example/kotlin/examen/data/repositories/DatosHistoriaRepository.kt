@@ -1,4 +1,4 @@
-package com.example.kotlin.historical.data.repositories
+package com.example.kotlin.examen.data.repositories
 
 import android.util.Log
 import com.example.kotlin.examen.data.network.NetworkModuleDI
@@ -10,7 +10,7 @@ import com.parse.ParseException
 /**
  * Repositorio que maneja la lógica de acceso a datos para los eventos históricos.
  */
-class HistoricalEventRepository {
+class DatosHistoriaRepository{
     fun consultarEventosHistoricos(callback: (List<EventoHistorico>?) -> Unit) {
         val parametros = HashMap<String, Any>()
 

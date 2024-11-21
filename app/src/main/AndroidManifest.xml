@@ -25,6 +25,11 @@
             android:theme="@style/Theme.Examen.NoActionBar">
         </activity>
 
+        <activity
+            android:name=".framework.views.activities.HistoriaActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Examen.NoActionBar">
+        </activity>
 
         <activity
             android:name=".framework.views.activities.SplashscreenActivity"

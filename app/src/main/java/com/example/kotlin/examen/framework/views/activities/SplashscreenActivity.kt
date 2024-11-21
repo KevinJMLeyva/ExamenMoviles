@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.kotlin.examen.databinding.ActivitySplashscreenBinding
 import com.example.kotlin.examen.framework.viewmodel.SplashscreenViewModel
-import com.example.kotlin.historical.data.repositories.HistoricalEventRepository
 
 /**
  * SplashscreenActivity displays a splash screen when the app launches.
@@ -46,10 +45,16 @@ class SplashscreenActivity : AppCompatActivity() {
             this,
             Observer { terminarCarga ->
                 if (terminarCarga) {
-                    Log.d("SplashscreenActivity", "Terminar carga")
+                    passViewGoToMain()
                 }
             }
         )
+    }
+    private fun passViewGoToMain() {
+        val intent: Intent = Intent(this, HistoriaActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        startActivity(intent)
+        finish()
     }
 
 }
